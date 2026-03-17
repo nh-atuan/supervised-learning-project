@@ -165,8 +165,8 @@
 ## Branching và commit
 
 * Branch:
-  `task/<phase>/<member>`
-  (vd: `task/eda/A`, `task/regression/B`)
+  `main` (stable), `dev` (integration), `feature/*` (task branch)
+  (vd: `feature/eda`, `feature/regression-model`, `feature/classification-model`, `feature/report`)
 
 * Mỗi phần:
 

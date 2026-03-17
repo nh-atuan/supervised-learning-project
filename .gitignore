@@ -1,0 +1,27 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files (keep README only)
+data/*.csv
+data/*.zip
+data/*.parquet
+data/*.xlsx
+data/*.json
+!data/README.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build and logs
+logs/
+outputs/
+*.log
