@@ -147,123 +147,16 @@
 
 ---
 
-## Timeline triển khai 
+## Deadline cho từng giai đoạn 
 
-* Start: **9/3**
-* End: **13/4**
-* Tổng thời lượng: **5 tuần (35 ngày)**
-
-| Tuần   | Khung ngày thực      | Giai đoạn chính                                  | Mục tiêu chính                                  | Deliverable |
-| ------ | -------------------- | ------------------------------------------------ | ----------------------------------------------- | ----------- |
-| Tuần 1 + 2 | 9/3 -> 23/3       | Dataset + EDA + Preprocessing                    | Chốt dataset, làm sạch dữ liệu, hoàn thiện EDA | Notebook EDA + pipeline tiền xử lý |
-| Tuần 3 | 24/3 -> 30/3       | Model Implementation + Integration Checkpoint 1 + bonus nhẹ | Hoàn thành model cốt lõi + hook QQ/BP/calibration + freeze schema output + implement bonus (Kernel) | Code model chạy được + regression integration freeze + kernel baseline |
-| Tuần 4 | 31/3 -> 6/4       | Evaluation + Visualization + Integration Checkpoint 2 | Hoàn thiện chỉ số, biểu đồ, test thống kê và so sánh bắt buộc | Bảng kết quả đầy đủ + classification integration freeze |
-| Tuần 5 | 7/4 -> 13/4       | Bonus window + Research + Report + Finalize      | Chốt bonus nặng đầu tuần, sau đó phân tích sâu và hoàn thiện báo cáo | PDF hoàn chỉnh + repo sẵn nộp + bonus comparison integrated |
-
-### Chi tiết theo mốc ngày thực
-
-#### Tuần 1 + 2 (9/3 -> 23/3): DATA + EDA
-
-* 9/3 - 18/3:
-
-  * Chốt 1 regression dataset + 1 classification dataset.
-  * Kiểm tra tiêu chí >= 10k samples, >= 5 features.
-  * Chốt split train/val/test (70/10/20), classification dùng stratified split.
-
-* 19/3 - 20/3:
-
-  * Regression: descriptive stats, histogram, boxplot, correlation, scatter.
-  * Classification: class distribution, imbalance analysis, feature visualization.
-
-* 21/3 - 22/3:
-
-  * Missing handling, normalization/standardization, encoding.
-  * Hoàn thiện pipeline dùng lại được cho cả train/val/test.
-
-* Deadline tuần 1 + 2: **23/3 - Hoàn thành Dataset + EDA**.
-
-#### Tuần 3 (24/3 -> 30/3): MODEL IMPLEMENTATION
-
-* 24/3 - 26/3:
-
-  * Regression core: Linear Regression (NE + mini-batch GD), LR schedule.
-  * Ridge/Lasso/Elastic Net, feature selection (Forward/Backward/Lasso).
-  * Tích hợp chuẩn bị residual diagnostics và dữ liệu cần cho QQ-plot.
-
-* 27/3 - 29/3:
-
-  * Non-linear basis: Polynomial, RBF, validation curve, ablation.
-  * Gắn hook cho Breusch-Pagan test; chuẩn bị flow fallback WLS khi phát hiện heteroscedasticity.
-
-* 30/3:
-
-  * Classification core start: Logistic Regression (GD + softmax), chuẩn bị Newton/IRLS.
-  * Đảm bảo toàn bộ model classification trả xác suất để phục vụ calibration ở tuần 4.
-  * Integration Checkpoint 1: khóa schema output regression, chạy dry-run bảng tổng hợp.
-  * Bonus nhẹ (không tách phase): implement Kernel Ridge + Kernel Logistic ở mức baseline (reuse pipeline hiện có).
-
-* Deadline tuần 2: **30/3: Model core phải chạy được**.
-
-#### Tuần 4 (31/3 -> 6/4): EVALUATION + ANALYSIS
-
-* 31/3 - 2/4 (Regression evaluation):
-
-  * MSE, RMSE, MAE, R2; learning curve, residual plot, pred vs actual.
-  * Bắt buộc: QQ-plot, Breusch-Pagan test; nếu có heteroscedasticity thì chạy WLS và so sánh OLS vs WLS.
-
-* 3/4 - 5/4 (Classification evaluation):
-
-  * Accuracy, Precision, Recall, F1; confusion matrix, ROC/AUC, PR curve.
-  * Bắt buộc: calibration curve (reliability diagram), McNemar's test, decision boundary (nếu 2D) và so sánh trước/sau calibration.
-
-* 6/4:
-
-  * k-fold CV (Regression k=10, Classification k=5).
-  * Statistical test (t-test/Wilcoxon) cho so sánh mô hình.
-  * Integration Checkpoint 2: freeze bảng so sánh thống nhất và checklist rubric coverage.
-
-* Deadline tuần 3: **6/4 - Hoàn thành Evaluation full**.
-
-#### Tuần 5 (7/4 -> 13/4): RESEARCH + REPORT + FINALIZE
-
-* 7/4 - 8/4 (BONUS):
-
-  * Regression bonus: Bias-Variance decomposition bằng bootstrap.
-  * Classification bonus: Probit hoặc refine Kernel Logistic (chọn 1 theo độ ổn định kết quả).
-  * Chuẩn hóa logging/seed/schema để đưa trực tiếp vào bảng so sánh tổng hợp.
-
-* 9/4:
-
-  * Analysis: so sánh model, bias-variance decomposition (định lượng), overfitting/underfitting, error analysis.
-  * Tổng hợp diễn giải OLS vs WLS, trước/sau calibration, ổn định hội tụ IRLS/Newton.
-
-* 10/4:
-
-  * Research: GLM, exponential family, Hessian/Jacobian, Gaussian-Markov, sensitivity/robustness.
-
-* 11/4:
-
-  * Viết và hợp nhất báo cáo LaTeX (theory + experiment + discussion) với nội dung rubric tích hợp theo từng phần.
-  * Report Freeze v1: khóa toàn bộ hình/bảng để chỉ sửa lỗi trình bày sau mốc này.
-
-* 12/4:
-
-  * Final check: reproducibility, requirements, seed, run lại notebook từ đầu.
-  * Buffer day cho lỗi phát sinh (merge conflict, metric mismatch, rerun experiment).
-  * Hoàn tất repo sẵn sàng nộp.
-
-* Deadline cuối: **13/4 - Nộp hoàn chỉnh**.
-
-### Critical Path (mốc bắt buộc)
-
-| Mốc bắt buộc      | Deadline  |
-| ----------------- | --------- |
-| Dataset + EDA     | 23/3     |
-| Model core + Integration Checkpoint 1 | 30/3  |
-| Evaluation full + Integration Checkpoint 2   | 6/4     |
-| Bonus window (Kernel/Bias-Var/Probit) | 8/4 |
-| Report full     | 12/4  |
-| Final submission  | 13/4     |
+| Giai đoạn | Deadline |
+| :---------: | :--------: |
+| 1 | 21/3 |
+| 2 | 26/3 |
+| 3 | 28/3 |
+| 4 | 1/4 |
+| 5 | 6/4 |
+| 6 | 13/4 |
 
 ---
 
