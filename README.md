@@ -1,19 +1,16 @@
 # Group_14 - Intro to Machine Learning Project
 
-This repository contains the group project with two main tasks:
+This repository contains the full source code, datasets, notebooks, and report for a project with two main parts:
 
 - Part 1: Regression
 - Part 2: Classification
 
-The project is organized for reproducibility, teamwork, and submission-ready structure.
+The main goal is to keep the project reproducible, team-friendly, and aligned with the required submission structure.
 
-## Repository Structure
+## Current Structure
 
 ```text
 Group_14/
-├── report/
-│   ├── report.tex
-│   └── report.pdf
 ├── code/
 │   ├── Part1_Regression/
 │   │   ├── notebook.ipynb
@@ -22,28 +19,47 @@ Group_14/
 │       ├── notebook.ipynb
 │       └── utils.py
 ├── data/
+│   ├── raw/
+│   │   ├── regression/
+│   │   │   ├── day.csv
+│   │   │   └── hour.csv
+│   │   └── classification/
+│   │       └── covtype.csv
+│   ├── processed/
+│   │   ├── regression/
+│   │   └── classification/
 │   └── README.md
 ├── docs/
-│   └── PLAN.md
+│   ├── REQUIREMENT.md
+│   ├── PLAN.md
+│   └── DATASET_SUMMARY.md
 ├── logs/
 ├── outputs/
+├── report/
+│   ├── report.tex
+│   └── report.pdf
 ├── requirements.txt
-├── .gitignore
 └── README.md
 ```
 
-## Quick Start
+## Datasets in Use
 
-### 1) Create virtual environment
+Read `data/README.md` for more information.
 
-Windows (PowerShell):
+See `docs/DATASET_SUMMARY.md` for a detailed dataset overview.
+
+## Quick Start (Windows)
+
+### 1) Create a virtual environment
+
+PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Windows (Command Prompt):
+Command Prompt:
 
 ```bat
 python -m venv .venv
@@ -56,20 +72,21 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### 3) Run notebooks
+### 3) Open notebooks
 
-Open and run:
+Run in the following order:
 
-- `code/Part1_Regression/notebook.ipynb`
-- `code/Part2_Classification/notebook.ipynb`
+1. `code/Part1_Regression/notebook.ipynb`
+2. `code/Part2_Classification/notebook.ipynb`
 
-## Reproducibility Rules
+## Reproducibility
 
-- Always fix random seed before experiments.
-- Keep train/test split and hyperparameters logged.
-- Use pinned dependencies in `requirements.txt`.
+- Always fix random seeds before training.
+- Log experiment settings and results in `logs/`.
+- Store figures/tables/models in `outputs/`.
+- Use pinned package versions in `requirements.txt`.
 
-Example:
+Seed example:
 
 ```python
 from code.Part1_Regression.utils import set_seed as set_seed_reg
@@ -79,21 +96,28 @@ set_seed_reg(42)
 set_seed_cls(42)
 ```
 
-## Team Workflow
+## Internal Documents
 
-### Branch Strategy
+- `docs/REQUIREMENT.md`: assignment details and technical requirements.
+- `docs/PLAN.md`: team allocation, timeline, and branch naming.
+- `docs/DATASET_SUMMARY.md`: summary of the two selected datasets.
+- `data/README.md`: raw/processed data management conventions.
 
-- `main`: stable branch only
-- `dev`: integration branch
-- `feature/*`: task branches, for example:
-	- `feature/eda`
-	- `feature/regression-model`
-	- `feature/classification-model`
-	- `feature/report`
+## Team Workflow Conventions
 
-### Commit Message Convention
+According to the current plan, task branches follow this format:
 
-Use format:
+```text
+task/<phase>/<member>-<task>
+```
+
+Examples:
+
+- `task/1/A-data-description`
+- `task/2/B-gradient-descent`
+- `task/6/E-final-report`
+
+Commit format:
 
 ```text
 type(scope): short description
@@ -101,18 +125,11 @@ type(scope): short description
 
 Examples:
 
-```text
-feat(eda): add correlation matrix
-fix(model): correct gradient descent bug
-docs(report): update section 2.1 theory
-```
-
-## Data Policy
-
-- Do not commit large dataset files.
-- Keep dataset source and download instructions in `data/README.md`.
+- `feat(regression): add ridge regression notebook section`
+- `fix(classification): stabilize irls convergence`
+- `docs(report): update experiment discussion`
 
 ## Notes
 
-- `logs/` is for experiment logs.
-- `outputs/` is for figures, tables, and exported artifacts.
+- The `logs/` and `outputs/` folders are currently empty and reserved for experiment artifacts.
+- The `__pycache__/` and `.ipynb_checkpoints/` folders are environment-generated auxiliary files.

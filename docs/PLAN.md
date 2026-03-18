@@ -214,7 +214,6 @@
 * Branch flow:
 
   * `main` (stable)
-  * `dev` (integration)
   * `task/*` (task branch)
 
 * Branch format (bắt buộc):
