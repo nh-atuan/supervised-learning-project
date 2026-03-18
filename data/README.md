@@ -1,30 +1,38 @@
-# Data Instructions
+# Data Directory
 
-This folder stores local datasets used for training and evaluation.
+This folder manages all datasets used in the project for two tasks:
 
-## Policy
+- Regression
+- Classification
 
-- Do not commit large raw data files to Git.
-- Only keep this `README.md` in version control.
+## Goals
 
-## Required Updates (Team)
+- Do not commit large data files (especially `.csv`) to Git.
+- Ensure reproducibility: the full path from raw data to processed data can be reproduced.
+- Keep regression and classification data separate to avoid mixing pipelines.
 
-Fill in the information below after finalizing datasets.
+## Structure
 
-### Regression dataset
+- `raw/`: Original downloaded datasets, not preprocessed.
+- `processed/`: Preprocessed datasets (clean, split, encode, scale, etc.).
+- `external/`: (optional) supplementary data from external sources.
 
-- Source link: `<paste link>`
-- File name after download: `<filename>`
-- Brief description: `<description>`
+## Datasets
 
-### Classification dataset
+### 1. Regression - Bike Sharing Dataset
 
-- Source link: `<paste link>`
-- File name after download: `<filename>`
-- Brief description: `<description>`
+- Source: UCI Machine Learning Repository
+- Link: https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
+- Description: Predict bike rental counts using weather, season, and time-based features.
 
-## Download Steps
+### 2. Classification - Forest Cover Type Dataset
 
-1. Download the dataset from the source links above.
-2. Put files in this folder (`data/`).
-3. Keep file names unchanged so notebooks run consistently.
+- Source: Kaggle
+- Link: https://www.kaggle.com/datasets/uciml/forest-cover-type-dataset
+- Description: Classify forest cover type using cartographic and environmental variables.
+
+## Important Conventions
+
+- Raw data is NOT included in this repository.
+- Follow the instructions in each subfolder to place data in the correct location.
+- Keep input file names exactly as documented so notebooks/scripts run consistently.
