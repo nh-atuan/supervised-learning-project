@@ -1,27 +1,7 @@
 # Kế hoạch
 
 * Phạm vi: gồm **Phần 1 (Regression), Phần 2 (Classification), Phần 3 (So sánh & báo cáo)**
-* Yêu cầu nâng cao (bonus) được tích hợp có kiểm soát vào timeline hiện tại, không tạo phase riêng
-
-## Chiến lược bonus (tích hợp, không overload)
-
-* Mục tiêu: tối ưu cơ hội +10 điểm bonus nhưng không phá vỡ critical path của phần core.
-* Nguyên tắc triển khai:
-
-  * Không làm sớm trước khi model core ổn định.
-  * Không dồn vào cuối tuần 5.
-  * Mỗi phần chỉ chọn 1-2 bonus có khả năng tái sử dụng pipeline.
-
-* Bonus được chọn:
-
-  * Regression: **Kernel Ridge** (ưu tiên) + **Bias-Variance bootstrap**.
-  * Classification: **Kernel Logistic** (ưu tiên) hoặc **Probit** (refine đầu tuần 5).
-
-* Khung thời gian tích hợp bonus:
-
-  * Cuối tuần 3 (30/3): bonus nhẹ dựa trên pipeline sẵn có (Kernel).
-  * Đầu tuần 5 (7/4 -> 8/4): bonus nặng cần model ổn định (Bias-Variance/Probit).
-  * Tuần 4: không thêm bonus để tránh quá tải.
+* Yêu cầu nâng cao (bonus) được tích hợp có kiểm soát vào timeline.
 
 ---
 
