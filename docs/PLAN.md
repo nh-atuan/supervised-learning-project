@@ -211,22 +211,52 @@
 
 ## Branching và commit
 
-* Branch:
-  `main` (stable), `dev` (integration), `feature/*` (task branch)
-  (vd: `feature/eda`, `feature/regression-model`, `feature/classification-model`, `feature/report`)
+* Branch flow:
 
-* Mỗi phần:
+  * `main` (stable)
+  * `dev` (integration)
+  * `task/*` (task branch)
 
-  * 1 người code chính
-  * 1 người review
+* Branch format (bắt buộc):
 
-* Commit:
+  ```
+  task/<phase>/<member>-<task>
+  ```
 
-  * rõ ràng, theo format:
+  Trong đó:
 
-    ```
-    feat(regression): implement ridge regression
-    ```
+  * `<phase>`: số giai đoạn theo PLAN (0 -> 6)
+  * `<member>`: mã thành viên `A | B | C | D | E`
+  * `<task>`: mô tả ngắn theo kebab-case
+
+* Mapping phase -> prefix:
+
+  * Giai đoạn 0 (Dataset): `task/0/`
+  * Giai đoạn 1 (EDA + preprocess): `task/1/`
+  * Giai đoạn 2 (Model): `task/2/`
+  * Giai đoạn 3 (Evaluation): `task/3/`
+  * Giai đoạn 4 (Analysis): `task/4/`
+  * Giai đoạn 5 (Research): `task/5/`
+  * Giai đoạn 6 (Report): `task/6/`
+
+* Ví dụ branch:
+
+  * `task/1/A-data-description`
+  * `task/2/B-gradient-descent`
+  * `task/2/C-regularization-models`
+  * `task/3/D-roc-auc`
+  * `task/6/E-final-report`
+
+* Quy tắc chống conflict (đặc biệt cho notebook):
+
+  * Mỗi người chỉ sửa đúng section được phân công.
+  * Notebook phải tách section rõ theo người và task (vd: `## [A] Linear Regression`, `## [B] Gradient Descent`).
+  * Không sửa cell thuộc phần của thành viên khác nếu chưa thống nhất.
+
+* Naming guideline:
+
+  * Nên dùng: `linear-regression`, `ridge-lasso`, `feature-selection`, `kernel-ridge`
+  * Không dùng: `fix1`, `test`, `code`, `update`
 
 ---
 
@@ -247,7 +277,6 @@
 ## Lưu ý triển khai
 
 * Các giai đoạn sẽ được thực hiện tuần tự để đảm bảo phụ thuộc dữ liệu.
-* Bonus triển khai theo nguyên tắc "gài vào pipeline": không tạo phase riêng, không thêm task ở tuần 4.
 * Để tránh xung đột mã nguồn khi merge:
 
   * Notebook chia theo section rõ ràng cho từng yêu cầu
@@ -270,21 +299,6 @@
 
 ---
 
-## Cấu trúc thư mục mã nguồn đề xuất
-
-```text
-src/
-├── utils.py              # Hàm tiện ích chung (seed, logging, I/O)
-├── dataset.py            # Load dữ liệu, split train/val/test
-├── visualize.py          # Hàm vẽ biểu đồ cho regression/classification
-├── stats_tests.py        # Kiểm định thống kê và so sánh mô hình
-├── metrics.py            # Metrics và helper đánh giá
-└── preprocessing/
-    ├── regression.py     # Pipeline tiền xử lý cho Part 1
-    └── classification.py # Pipeline tiền xử lý cho Part 2
-```
-
----
 
 ## Đảm bảo tính reproducibility
 
