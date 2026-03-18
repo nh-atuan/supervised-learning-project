@@ -10,6 +10,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Data files (keep README only)
+*.csv
 data/*.csv
 data/*.zip
 data/*.parquet
