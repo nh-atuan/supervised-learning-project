@@ -1,11 +1,11 @@
-# Kế hoạch
+# 1. Kế hoạch
 
-* Phạm vi: gồm **Phần 1 (Regression), Phần 2 (Classification), Phần 3 (So sánh & báo cáo)**
-* Yêu cầu nâng cao (bonus) được tích hợp có kiểm soát vào timeline.
+* Gồm **Phần 1 (Regression), Phần 2 (Classification), Phần 3 (So sánh & báo cáo)**
+* Yêu cầu nâng cao (bonus) được tích hợp có kiểm soát vào timeline
 
 ---
 
-## Danh sách thành viên
+## 2. Danh sách thành viên
 
 | Mã | MSSV     | Họ và tên          |
 | -- | -------- | ------------------ |
@@ -17,9 +17,9 @@
 
 ---
 
-## Phân công
+## 3. Phân công
 
-## Giai đoạn 0 - Chọn dataset
+### 3.1 Giai đoạn 0 - Chọn dataset
 
 * Cả nhóm:
 
@@ -29,7 +29,7 @@
 
 ---
 
-## Giai đoạn 1 - EDA + Tiền xử lý
+### 3.2 Giai đoạn 1 - EDA + Tiền xử lý
 
 | Thành viên   | Regression (Part 1 - 2.2.2) | Classification (Part 2 - 3.2.1 + EDA) |
 | :-----------: | --------------------------- | ------------------------------------- |
@@ -41,9 +41,9 @@
 
 ---
 
-## Giai đoạn 2 - Model Implementation
+### 3.3 Giai đoạn 2 - Model Implementation
 
-### Phần 1 - Regression
+#### 3.3.1 Phần 1 - Regression
 
 | Thành viên   | Nội dung                                      |
 | :------------: | --------------------------------------------- |
@@ -55,7 +55,7 @@
 
 ---
 
-### Phần 2 - Classification
+#### 3.3.2 Phần 2 - Classification
 
 | Thành viên   | Nội dung                                    |
 | :------------: | ------------------------------------------- |
@@ -67,9 +67,9 @@
 
 ---
 
-## Giai đoạn 3 - Evaluation & Visualization
+### 3.4 Giai đoạn 3 - Evaluation & Visualization
 
-### Phần 1 - Regression
+#### 3.4.1 Phần 1 - Regression
 
 | Thành viên | Regression                                      |
 | :----------: | ----------------------------------------------- |
@@ -79,7 +79,7 @@
 | D          | Pred vs Actual + WLS + so sánh OLS vs WLS       |
 | E          | k-fold CV (k=10) + statistical test + validate schema output + chuẩn hóa logging cho kết quả bonus (Kernel Ridge/Bias-Variance) |
 
-### Phần 2 - Classification
+#### 3.4.2 Phần 2 - Classification
 
 | Thành viên | Classification                                  |
 | :----------: | ----------------------------------------------- |
@@ -91,7 +91,7 @@
 
 ---
 
-## Giai đoạn 4 - Analysis & Discussion
+### 3.5 Giai đoạn 4 - Analysis & Discussion
 
 | Thành viên | Nội dung                                 |
 | :----------: | ---------------------------------------- |
@@ -103,7 +103,7 @@
 
 ---
 
-## Giai đoạn 5 - Phần 3 (So sánh & Research)
+### 3.6 Giai đoạn 5 - Phần 3 (So sánh & Research)
 
 | Thành viên | Nội dung                            |
 | :----------: | ----------------------------------- |
@@ -115,7 +115,7 @@
 
 ---
 
-## Giai đoạn 6 - Viết báo cáo
+### 3.7 Giai đoạn 6 - Viết báo cáo
 
 | Thành viên | Nội dung                |
 | :----------: | ----------------------- |
@@ -127,7 +127,7 @@
 
 ---
 
-## Deadline cho từng giai đoạn 
+## 4. Deadline cho từng giai đoạn
 
 | Giai đoạn | Deadline |
 | :---------: | :--------: |
@@ -140,9 +140,9 @@
 
 ---
 
-## Đầu ra mong đợi
+## 5. Đầu ra mong đợi
 
-### Regression
+### 5.1 Regression
 
 * Code:
 
@@ -158,7 +158,7 @@
 
 ---
 
-### Classification
+### 5.2 Classification
 
 * Code:
 
@@ -174,7 +174,7 @@
 
 ---
 
-### Báo cáo
+### 5.3 Báo cáo
 
 * LaTeX đầy đủ:
 
@@ -189,12 +189,16 @@
 
 ---
 
-## Branching và commit
+## 6. Branching và commit
+
+### 6.1 Branch flow
 
 * Branch flow:
 
   * `main` (stable)
   * `task/*` (task branch)
+
+### 6.2 Branch format
 
 * Branch format (bắt buộc):
 
@@ -208,6 +212,8 @@
   * `<member>`: mã thành viên `A | B | C | D | E`
   * `<task>`: mô tả ngắn theo kebab-case
 
+### 6.3 Mapping phase -> prefix
+
 * Mapping phase -> prefix:
 
   * Giai đoạn 0 (Dataset): `task/0/`
@@ -218,6 +224,8 @@
   * Giai đoạn 5 (Research): `task/5/`
   * Giai đoạn 6 (Report): `task/6/`
 
+### 6.4 Ví dụ branch
+
 * Ví dụ branch:
 
   * `task/1/A-data-description`
@@ -226,11 +234,15 @@
   * `task/3/D-roc-auc`
   * `task/6/E-final-report`
 
+### 6.5 Quy tắc chống conflict
+
 * Quy tắc chống conflict (đặc biệt cho notebook):
 
   * Mỗi người chỉ sửa đúng section được phân công.
   * Notebook phải tách section rõ theo người và task (vd: `## [A] Linear Regression`, `## [B] Gradient Descent`).
   * Không sửa cell thuộc phần của thành viên khác nếu chưa thống nhất.
+
+### 6.6 Naming guideline
 
 * Naming guideline:
 
@@ -239,7 +251,7 @@
 
 ---
 
-## Yêu cầu về code
+## 7. Yêu cầu về code
 
 * Python 3.x + venv
 * Thư viện:
@@ -253,7 +265,7 @@
 
 ---
 
-## Lưu ý triển khai
+## 8. Lưu ý triển khai
 
 * Các giai đoạn sẽ được thực hiện tuần tự để đảm bảo phụ thuộc dữ liệu.
 * Để tránh xung đột mã nguồn khi merge:
@@ -263,7 +275,7 @@
 
 ---
 
-## Tiêu chí chung cho tất cả yêu cầu
+## 9. Tiêu chí chung cho tất cả yêu cầu
 
 * Mỗi yêu cầu trong notebook phải có đủ 3 phần:
 
@@ -279,7 +291,7 @@
 ---
 
 
-## Đảm bảo tính reproducibility
+## 10. Đảm bảo tính reproducibility
 
 Trước các bước có ngẫu nhiên (data split, CV shuffle, khởi tạo model), chạy cell cố định seed ở đầu notebook:
 
@@ -293,7 +305,7 @@ set_seed_cls(42)
 
 ---
 
-## Tập dữ liệu
+## 11. Tập dữ liệu
 
 * Mô tả và hướng dẫn đặt dữ liệu trong [data/README.md](data/README.md).
 * README tổng quan dự án nằm ở [README.md](README.md).
