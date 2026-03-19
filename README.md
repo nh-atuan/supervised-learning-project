@@ -1,13 +1,15 @@
 # Group_14 - Intro to Machine Learning Project
 
+## 1. Project Overview
+
 This repository contains the full source code, datasets, notebooks, and report for a project with two main parts:
 
-- Part 1: Regression
-- Part 2: Classification
+- **Part 1:** Regression
+- **Part 2:** Classification
 
 The main goal is to keep the project reproducible, team-friendly, and aligned with the required submission structure.
 
-## Current Structure
+## 2. Project Structure
 
 ```text
 Group_14/
@@ -42,44 +44,117 @@ Group_14/
 └── README.md
 ```
 
-## Datasets in Use
+## 3. Datasets
 
-Read `data/README.md` for more information.
+- **Dataset description:** Read `data/README.md` for more information.
+- **Detailed summary:** See `docs/DATASET_SUMMARY.md` for a detailed dataset overview.
 
-See `docs/DATASET_SUMMARY.md` for a detailed dataset overview.
+## 4. Environment Setup
 
-## Quick Start (Windows)
+### 4.1 Python Version (Required)
 
-### 1) Create a virtual environment
+> WARNING: All team members must use Python 3.11.x to ensure consistent and reproducible results.
+
+- Required version: **Python 3.11.x**
+- Do not use Python 3.12+ or 3.10- to avoid dependency and notebook kernel issues.
+
+### 4.2 Create a Virtual Environment
+
+#### venv (Recommended)
+
+```bash
+python3.11 -m venv .venv
+```
+
+### 4.3 Activate Environment
+
+- **4.3.1 Windows PowerShell**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+- **4.3.2 Windows Command Prompt**
+
+```bat
+.venv\Scripts\activate.bat
+```
+
+- **4.3.3 macOS/Linux**
+
+```bash
+source .venv/bin/activate
+```
+
+### 4.4 Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4.5 Register Jupyter Kernel
+
+```bash
+python -m ipykernel install --user --name=ml-project-py311
+```
+
+Then select the kernel:
+
+```text
+ml-project-py311
+```
+
+### 4.6 Verify Python Version
+
+```bash
+python --version
+```
+
+Expected output:
+
+```text
+Python 3.11.x
+```
+
+### 4.7 Team Rules
+
+- **4.7.1** Do not commit code executed with a different Python version.
+- **4.7.2** If you face runtime or package errors, verify Python version first.
+- **4.7.3** Notebooks must run end-to-end from a clean kernel without errors.
+
+
+## 5. Quick Start
+
+### 5.1 Set up and activate environment
 
 PowerShell:
 
 ```powershell
-python -m venv .venv
+py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
 Command Prompt:
 
 ```bat
-python -m venv .venv
+py -3.11 -m venv .venv
 .venv\Scripts\activate.bat
 ```
 
-### 2) Install dependencies
+### 5.2 Install dependencies
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-### 3) Open notebooks
+### 5.3 Open notebooks
 
 Run in the following order:
 
 1. `code/Part1_Regression/notebook.ipynb`
 2. `code/Part2_Classification/notebook.ipynb`
 
-## Reproducibility
+## 6. Reproducibility
 
 - Always fix random seeds before training.
 - Log experiment settings and results in `logs/`.
@@ -96,14 +171,16 @@ set_seed_reg(42)
 set_seed_cls(42)
 ```
 
-## Internal Documents
+## 7. Internal Documents
 
 - `docs/REQUIREMENT.md`: assignment details and technical requirements.
 - `docs/PLAN.md`: team allocation, timeline, and branch naming.
 - `docs/DATASET_SUMMARY.md`: summary of the two selected datasets.
 - `data/README.md`: raw/processed data management conventions.
 
-## Team Workflow Conventions
+## 8. Team Workflow
+
+### 8.1 Branch Naming
 
 According to the current plan, task branches follow this format:
 
@@ -117,6 +194,8 @@ Examples:
 - `task/2/B-gradient-descent`
 - `task/6/E-final-report`
 
+### 8.2 Commit Convention
+
 Commit format:
 
 ```text
@@ -129,7 +208,4 @@ Examples:
 - `fix(classification): stabilize irls convergence`
 - `docs(report): update experiment discussion`
 
-## Notes
-
-- The `logs/` and `outputs/` folders are currently empty and reserved for experiment artifacts.
-- The `__pycache__/` and `.ipynb_checkpoints/` folders are environment-generated auxiliary files.
+Read more [here](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
