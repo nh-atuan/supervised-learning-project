@@ -19,7 +19,7 @@
 
 ## 3. Phân công
 
-### 3.1 Giai đoạn 0 - Chọn dataset
+### Giai đoạn 0 - Chọn dataset
 
 * Cả nhóm:
 
@@ -29,7 +29,7 @@
 
 ---
 
-### 3.2 Giai đoạn 1 - EDA + Tiền xử lý
+### Giai đoạn 1 - EDA + Tiền xử lý
 
 | Thành viên   | Regression (Part 1 - 2.2.2) | Classification (Part 2 - 3.2.1 + EDA) |
 | :-----------: | --------------------------- | ------------------------------------- |
@@ -41,9 +41,9 @@
 
 ---
 
-### 3.3 Giai đoạn 2 - Model Implementation
+### Giai đoạn 2 - Model Implementation
 
-#### 3.3.1 Phần 1 - Regression
+#### Phần 1 - Regression
 
 | Thành viên   | Nội dung                                      |
 | :------------: | --------------------------------------------- |
@@ -55,7 +55,7 @@
 
 ---
 
-#### 3.3.2 Phần 2 - Classification
+#### Phần 2 - Classification
 
 | Thành viên   | Nội dung                                    |
 | :------------: | ------------------------------------------- |
@@ -67,9 +67,9 @@
 
 ---
 
-### 3.4 Giai đoạn 3 - Evaluation & Visualization
+### Giai đoạn 3 - Evaluation & Visualization
 
-#### 3.4.1 Phần 1 - Regression
+#### Phần 1 - Regression
 
 | Thành viên | Regression                                      |
 | :----------: | ----------------------------------------------- |
@@ -79,7 +79,7 @@
 | D          | Pred vs Actual + WLS + so sánh OLS vs WLS       |
 | E          | k-fold CV (k=10) + statistical test + validate schema output + chuẩn hóa logging cho kết quả bonus (Kernel Ridge/Bias-Variance) |
 
-#### 3.4.2 Phần 2 - Classification
+#### Phần 2 - Classification
 
 | Thành viên | Classification                                  |
 | :----------: | ----------------------------------------------- |
@@ -91,7 +91,7 @@
 
 ---
 
-### 3.5 Giai đoạn 4 - Analysis & Discussion
+### Giai đoạn 4 - Analysis & Discussion
 
 | Thành viên | Nội dung                                 |
 | :----------: | ---------------------------------------- |
@@ -103,7 +103,7 @@
 
 ---
 
-### 3.6 Giai đoạn 5 - Phần 3 (So sánh & Research)
+### Giai đoạn 5 - Phần 3 (So sánh & Research)
 
 | Thành viên | Nội dung                            |
 | :----------: | ----------------------------------- |
@@ -115,7 +115,7 @@
 
 ---
 
-### 3.7 Giai đoạn 6 - Viết báo cáo
+### Giai đoạn 6 - Viết báo cáo
 
 | Thành viên | Nội dung                |
 | :----------: | ----------------------- |
