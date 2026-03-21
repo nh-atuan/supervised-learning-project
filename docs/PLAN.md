@@ -186,6 +186,12 @@
   * Hình vẽ rõ ràng
   * Bảng so sánh
   * Trích dẫn chuẩn
+* Yêu cầu formal:
+
+  * File nộp dưới dạng PDF.
+  * Không giới hạn số trang (không tính phụ lục, bìa,...).
+  * Khuyến nghị sử dụng LaTeX (nộp kèm source `.tex` nếu dùng).
+  * Mỗi thành viên phải có phần đóng góp rõ ràng.
 
 ---
 
@@ -251,9 +257,9 @@
 
 ---
 
-## 7. Yêu cầu về code
+## 7. Yêu cầu về code (Updated)
 
-* Python 3.x + venv
+* Python 3.11.x + venv
 * Thư viện:
 
   * numpy, pandas, matplotlib, sklearn
@@ -262,6 +268,10 @@
   * seed cố định
   * code chạy lại được
   * requirements.txt
+* Tất cả code phải chạy lại được từ đầu (end-to-end).
+* Phần cài đặt từ đầu phải tách biệt với phần dùng thư viện kiểm chứng.
+* Ghi rõ version Python và thư viện trong requirements.txt hoặc environment.yml.
+* Đặt random seed để đảm bảo reproducibility.
 
 ---
 
@@ -305,9 +315,42 @@ set_seed_cls(42)
 
 ---
 
-## 11. Tập dữ liệu
+## 11. Khả năng tái hiện thí nghiệm (Reproducibility)
+
+Để đảm bảo kết quả có thể tái hiện:
+
+* Cố định tất cả random seed (data split, model initialization, CV,...).
+* Ghi log đầy đủ:
+
+  * hyperparameters
+  * train/val/test split indices
+  * metric theo từng fold
+* Báo cáo:
+
+  * thời gian train / inference
+  * bộ nhớ tiêu tốn (nếu có thể)
+* Cung cấp:
+
+  * requirements.txt hoặc environment.yml với version cụ thể
+* Kết quả phải tái hiện được khi chạy lại toàn bộ notebook từ đầu.
+
+---
+
+## 12. Tập dữ liệu
 
 * Mô tả và hướng dẫn đặt dữ liệu trong [data/README.md](data/README.md).
 * README tổng quan dự án nằm ở [README.md](README.md).
 * Khi chốt dataset, cần cập nhật lại thống kê mẫu/đặc trưng vào notebook của từng phần.
 
+---
+
+## 13. Tiêu chí đánh giá báo cáo
+
+Báo cáo cần đảm bảo:
+
+* Trình bày rõ ràng, mạch lạc, có cấu trúc logic.
+* Công thức toán học chính xác, có giải thích ký hiệu và thống nhất xuyên suốt.
+* Biểu đồ đầy đủ: tiêu đề, nhãn trục, chú thích.
+* Code sạch, có comment, có thể chạy lại và kiểm chứng.
+* Phân tích kết quả sâu sắc, thể hiện hiểu biết về mô hình/thuật toán.
+* Trích dẫn tài liệu đúng chuẩn (IEEE hoặc APA).
