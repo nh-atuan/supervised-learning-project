@@ -2,6 +2,7 @@
 
 * Gồm **Phần 1 (Regression), Phần 2 (Classification), Phần 3 (So sánh & báo cáo)**
 * Yêu cầu nâng cao (bonus) được tích hợp có kiểm soát vào timeline
+* Data pipeline và Model pipeline tách biệt hoàn toàn. Thành viên phụ trách data không làm model và ngược lại.
 
 ---
 
@@ -31,13 +32,11 @@
 
 ### Giai đoạn 1 - EDA + Tiền xử lý
 
-| Thành viên   | Regression (Part 1 - 2.2.2) | Classification (Part 2 - 3.2.1 + EDA) |
-| :-----------: | --------------------------- | ------------------------------------- |
-| A      | Mô tả dữ liệu + thống kê    | Mô tả dataset + class distribution    |
-| B       | Histogram, correlation      | EDA + imbalance analysis              |
-| C  | Outlier detection (IQR/Z)   | Feature analysis + visualization      |
-| D       | Missing + normalization     | Preprocessing + encoding              |
-| E      | Data split + pipeline       | Data split + pipeline                 |
+| Phần                  | Thành viên         | Nội dung                                                                                                   |
+| --------------------- | ------------- | ---------------------------------------------------------------------------------------------------------- |
+| Regression - Data     | A (Xuân Trí)  | 2.1.1 + 2.2.2 + Mục 2 trong 2.3 (Mô tả dataset, EDA, visualization, xử lý missing, normalization, chia  train/valid/test, xây dựng dataset hoàn chỉnh, kiểm định Breusch–Pagan, WLS nếu cần,...) |
+| Classification - Data | D (Tống Phúc) | 3.2.1  + Mục 2 trong 3.3 (Mô tả dataset, EDA, class distribution, imbalance, preprocessing, encoding, chia tập train/valid/test,...)                   |
+| Tổng hợp       | E     | Kiểm tra + hỗ trợ + đảm bảo chất lượng |
 
 ---
 
@@ -45,85 +44,63 @@
 
 #### Phần 1 - Regression
 
-| Thành viên   | Nội dung                                      |
-| :------------: | --------------------------------------------- |
-| A     | Linear Regression (Normal Equation) + residual diagnostics design |
-| B     | Gradient Descent + learning rate schedule + Breusch-Pagan hook |
-| C  | Ridge/Lasso/Elastic Net + Lasso path + điều kiện phát hiện heteroscedasticity |
-| D     | Feature selection (Forward/Backward/Lasso) + khung so sánh OLS vs WLS + template bảng tổng hợp |
-| E     | Core pipeline owner (split/preprocess/logging/artifact) + tích hợp **Kernel Ridge (bonus)** + chuẩn bị khung bootstrap cho Bias-Variance (đầu tuần 5) |
+| Thành viên        | Vai trò | Nội dung                                                                   |
+| ------------ | ------- | -------------------------------------------------------------------------- |
+| B (Tuấn Anh) | Model   | 2.2.3 + Mục 3, 4, 5 trong 2.3 (Xây dựng model, train, regularization, feature selection, nonlinear models,...)|
 
 ---
 
 #### Phần 2 - Classification
 
-| Thành viên   | Nội dung                                    |
-| :------------: | ------------------------------------------- |
-| A     | Logistic Regression (GD - binary + softmax) + đảm bảo output xác suất + calibration hook |
-| B     | Newton-Raphson / IRLS + theo dõi hội tụ + lưu convergence log |
-| C  | LDA + QDA + decision boundary (2D projection khi phù hợp) + McNemar hook |
-| D     | Perceptron + owner template so sánh trước/sau calibration + bảng tổng hợp classification |
-| E     | Regularization + class-weighted + tích hợp pipeline lưu prediction/probability + **Kernel LR (bonus)** + hỗ trợ Probit refine (đầu tuần 5) + CV hỗ trợ |
+| Thành viên         | Vai trò | Nội dung                                      |
+| ------------- | ------- | --------------------------------------------- |
+| C (Đàm Đạt)   | Model   | 3.2.2 + Mục 3, 4, 5 trong 3.3 (Logistic, LDA/QDA, Perceptron, regularization,...) |
+
+---
+
+### Bonus + System
+
+| Thành viên        | Nội dung                                                                                              |
+| ------------ | ----------------------------------------------------------------------------------------------------- |
+| E (Anh Tuấn) | Kiểm tra + hỗ trợ + đảm bảo chất lượng & Cài đặt để lấy điểm bonus của 2 phần|
 
 ---
 
 ### Giai đoạn 3 - Evaluation & Visualization
 
-#### Phần 1 - Regression
-
-| Thành viên | Regression                                      |
-| :----------: | ----------------------------------------------- |
-| A          | MSE, RMSE, MAE, R² + QQ-plot                    |
-| B          | Learning curve + Breusch-Pagan test             |
-| C          | Residual plot + phát hiện heteroscedasticity    |
-| D          | Pred vs Actual + WLS + so sánh OLS vs WLS       |
-| E          | k-fold CV (k=10) + statistical test + validate schema output + chuẩn hóa logging cho kết quả bonus (Kernel Ridge/Bias-Variance) |
-
-#### Phần 2 - Classification
-
-| Thành viên | Classification                                  |
-| :----------: | ----------------------------------------------- |
-| A          | Accuracy + calibration curve (reliability diagram) |
-| B          | Precision, Recall, F1 + hội tụ Newton/IRLS      |
-| C          | Confusion Matrix + decision boundary (nếu 2D)   |
-| D          | ROC + AUC + so sánh trước/sau calibration + owner bảng tổng hợp |
-| E          | PR curve + k-fold CV (k=5) + kiểm tra tính nhất quán output + chuẩn hóa output xác suất cho Kernel Logistic/Probit |
+| Phần           | Thành viên     | Nội dung                                                   |
+| -------------- | --------- | ---------------------------------------------------------- |
+| Regression     | A  |2.2.4 + Mục 6 trong 2.3 (Metric (MSE, RMSE, MAE, R²), learning curve, residual, CV,...) |
+| Classification | D | 3.2.3 + Mục 6 trong 3.3 (Accuracy, Precision, Recall, F1, ROC, PR, CV,...)              |
+| Tổng hợp       | E     | Kiểm tra + hỗ trợ + đảm bảo chất lượng |
 
 ---
 
 ### Giai đoạn 4 - Analysis & Discussion
 
-| Thành viên | Nội dung                                 |
-| :----------: | ---------------------------------------- |
-| A          | So sánh model Regression + diễn giải QQ-plot/giả định |
-| B          | Bias-Variance decomposition (định lượng) + regularization |
-| C          | So sánh model Classification + phân tích McNemar/calibration |
-| D          | Error analysis + hội tụ IRLS/Newton-Raphson + OLS vs WLS |
-| E          | Overfitting / Underfitting + improvement + tổng hợp kiểm định + tích hợp bảng so sánh core vs bonus |
+| Phần           | Thành viên | Nội dung                                      |
+| -------------- | ----- | --------------------------------------------- |
+| Regression     | A + B | Phân tích (A: data insights, B: model insights) |
+| Classification | D + C | Phân tích (D: data insights, C: model insights) |
+| Tổng hợp       | E     | Kiểm tra + hỗ trợ + đảm bảo chất lượng |
 
 ---
 
 ### Giai đoạn 5 - Phần 3 (So sánh & Research)
+Sẽ chia sau
 
 | Thành viên | Nội dung                            |
 | :----------: | ----------------------------------- |
-| A          | Kết nối Regression - Classification (góc nhìn GLM) + viết narrative so sánh |
-| B          | GLM + exponential family + thiết kế thí nghiệm split variation (3 seed) |
-| C          | Hessian/Jacobian cho Logistic Regression + thí nghiệm feature corruption (5%-10%-20%) |
-| D          | Gaussian-Markov assumptions + thí nghiệm noise injection (Gaussian noise theo nhiều mức) |
-| E          | Reproducibility + logging + sensitivity/robustness summary table +  bonus  |
+| A          | |
+| B          |  |
+| C          | |
+| D          | |
+| E          |   |
 
 ---
 
 ### Giai đoạn 6 - Viết báo cáo
-
-| Thành viên | Nội dung                |
-| :----------: | ----------------------- |
-| A          | Part 1 - Theory + giả định/QQ-plot/Breusch-Pagan |
-| B          | Part 1 - Experiment + OLS vs WLS + learning analysis |
-| C          | Part 2 - Theory + Hessian/Jacobian + calibration theory |
-| D          | Part 2 - Experiment + McNemar + trước/sau calibration |
-| E         | Tổng hợp + format LaTeX + bảo đảm đầu ra + tích hợp narrative bonus vào bảng so sánh/analysis hiện có |
+Ai làm phần nào viết báo cáo phần đó
 
 ---
 
@@ -131,11 +108,11 @@
 
 | Giai đoạn | Deadline |
 | :---------: | :--------: |
-| 1 | 21/3 |
-| 2 | 26/3 |
-| 3 | 28/3 |
-| 4 | 1/4 |
-| 5 | 6/4 |
+| 1 | 25/3 |
+| 2 | 30/3 |
+| 3 | 2/4 |
+| 4 | 5/4 |
+| 5 | 8/4 |
 | 6 | 13/4 |
 
 ---
@@ -209,43 +186,38 @@
 * Branch format (bắt buộc):
 
   ```
-  task/<phase>/<member>-<task>
+  task/<phase>/<member>
   ```
 
   Trong đó:
 
-  * `<phase>`: số giai đoạn theo PLAN (0 -> 6)
+  * `<phase>`: mô tả giai đoạn
   * `<member>`: mã thành viên `A | B | C | D | E`
-  * `<task>`: mô tả ngắn theo kebab-case
 
 ### 6.3 Mapping phase -> prefix
 
 * Mapping phase -> prefix:
 
-  * Giai đoạn 0 (Dataset): `task/0/`
-  * Giai đoạn 1 (EDA + preprocess): `task/1/`
-  * Giai đoạn 2 (Model): `task/2/`
-  * Giai đoạn 3 (Evaluation): `task/3/`
-  * Giai đoạn 4 (Analysis): `task/4/`
-  * Giai đoạn 5 (Research): `task/5/`
-  * Giai đoạn 6 (Report): `task/6/`
+  * Giai đoạn 1: `task/eda-preprocessing/`
+  * Giai đoạn 2: `task/model/`
+  * Giai đoạn 3: `task/evaluation/`
+  * Giai đoạn 4: `task/analysis/`
+  * Giai đoạn 5 : `task/research/`
+  * Giai đoạn 6: `task/report/`
 
 ### 6.4 Ví dụ branch
 
 * Ví dụ branch:
 
-  * `task/1/A-data-description`
-  * `task/2/B-gradient-descent`
-  * `task/2/C-regularization-models`
-  * `task/3/D-roc-auc`
-  * `task/6/E-final-report`
+  * `task/eda-preprocessing/memA`
+  * `task/model/memB`
 
 ### 6.5 Quy tắc chống conflict
 
 * Quy tắc chống conflict (đặc biệt cho notebook):
 
-  * Mỗi người chỉ sửa đúng section được phân công.
-  * Notebook phải tách section rõ theo người và task (vd: `## [A] Linear Regression`, `## [B] Gradient Descent`).
+  * Mỗi Thành viên chỉ sửa đúng section được phân công.
+  * Notebook phải tách section rõ theo Thành viên và task (vd: `## [A] Linear Regression`, `## [B] Gradient Descent`).
   * Không sửa cell thuộc phần của thành viên khác nếu chưa thống nhất.
 
 ### 6.6 Naming guideline
