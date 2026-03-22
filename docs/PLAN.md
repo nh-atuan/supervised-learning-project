@@ -82,7 +82,7 @@
 | -------------- | ----- | --------------------------------------------- |
 | Regression     | A + B | Phân tích (A: data insights, B: model insights) |
 | Classification | D + C | Phân tích (D: data insights, C: model insights) |
-| Tổng hợp       | E     | Kiểm tra + hỗ trợ + đảm bảo chất lượng |
+| Tổng hợp       | E     | Phân tích các model insights của thuật toán bonus |
 
 ---
 
