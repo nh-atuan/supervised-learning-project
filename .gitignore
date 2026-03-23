@@ -17,6 +17,8 @@ data/*.parquet
 data/*.xlsx
 data/*.json
 !data/README.md
+*.pkl
+*.png
 
 # OS files
 .DS_Store
