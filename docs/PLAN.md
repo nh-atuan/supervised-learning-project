@@ -10,11 +10,11 @@
 
 | Mã | MSSV     | Họ và tên          |
 | -- | -------- | ------------------ |
-| A  | 2312099 | Lê Xuân Trí        |
-| B  | 231228 | Dương Tuấn Anh     |
-| C  | 2312118 | Đàm Tiến Đạt       |
-| D  | 2312158 | Tống Thanh Phúc    |
-| E  | 2312185 | Nguyễn Hồ Anh Tuấn |
+| A  | 23120099 | Lê Xuân Trí        |
+| B  | 23120208 | Dương Tuấn Anh     |
+| C  | 23120118 | Đàm Tiến Đạt       |
+| D  | 23120158 | Tống Thanh Phúc    |
+| E  | 23120185 | Nguyễn Hồ Anh Tuấn |
 
 ---
 
