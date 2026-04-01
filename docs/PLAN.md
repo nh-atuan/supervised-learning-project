@@ -10,11 +10,11 @@
 
 | Mã | MSSV     | Họ và tên          |
 | -- | -------- | ------------------ |
-| A  | 2312099 | Lê Xuân Trí        |
-| B  | 231228 | Dương Tuấn Anh     |
-| C  | 2312118 | Đàm Tiến Đạt       |
-| D  | 2312158 | Tống Thanh Phúc    |
-| E  | 2312185 | Nguyễn Hồ Anh Tuấn |
+| A  | 23120099 | Lê Xuân Trí        |
+| B  | 23120208 | Dương Tuấn Anh     |
+| C  | 23120118 | Đàm Tiến Đạt       |
+| D  | 23120158 | Tống Thanh Phúc    |
+| E  | 23120185 | Nguyễn Hồ Anh Tuấn |
 
 ---
 
@@ -62,7 +62,7 @@
 
 | Thành viên        | Nội dung                                                                                              |
 | ------------ | ----------------------------------------------------------------------------------------------------- |
-| E (Anh Tuấn) | Kiểm tra + hỗ trợ + đảm bảo chất lượng & Cài đặt để lấy điểm bonus của 2 phần|
+| E (Anh Tuấn) | Kiểm tra + hỗ trợ + đảm bảo chất lượng |
 
 ---
 
@@ -72,7 +72,7 @@
 | -------------- | --------- | ---------------------------------------------------------- |
 | Regression     | A  |2.2.4 + Mục 6 trong 2.3 (Metric (MSE, RMSE, MAE, R²), learning curve, residual, CV,...) |
 | Classification | D | 3.2.3 + Mục 6 trong 3.3 (Accuracy, Precision, Recall, F1, ROC, PR, CV,...)              |
-| Tổng hợp       | E     | Kiểm tra + hỗ trợ + đảm bảo chất lượng |
+| Tổng hợp       | E     | Cài đặt để lấy điểm bonus của 2 phần & evaluation + comparison + Kiểm tra + hỗ trợ + đảm bảo chất lượng |
 
 ---
 
@@ -109,7 +109,7 @@ Ai làm phần nào viết báo cáo phần đó
 | Giai đoạn | Deadline |
 | :---------: | :--------: |
 | 1 | 25/3 |
-| 2 | 30/3 |
+| 2 | 31/3 |
 | 3 | 2/4 |
 | 4 | 5/4 |
 | 5 | 8/4 |
@@ -199,7 +199,7 @@ Ai làm phần nào viết báo cáo phần đó
 * Mapping phase -> prefix:
 
   * Giai đoạn 1: `task/eda-preprocessing/`
-  * Giai đoạn 2: `task/model/`
+  * Giai đoạn 2: `task/models/`
   * Giai đoạn 3: `task/evaluation/`
   * Giai đoạn 4: `task/analysis/`
   * Giai đoạn 5 : `task/research/`
