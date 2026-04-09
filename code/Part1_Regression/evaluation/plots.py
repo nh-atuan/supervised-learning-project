@@ -383,3 +383,281 @@ def plot_heatmap(
     ax.set_title(title)
     plt.tight_layout()
     return ax
+
+
+# ============================================================================
+# 11. Cross-Validation Boxplot
+# ============================================================================
+
+def plot_cv_boxplot(
+    cv_results_dict: dict[str, dict],
+    metric: str = "R²",
+    title: str = "Cross-Validation Comparison",
+    ax: Optional[plt.Axes] = None,
+) -> plt.Axes:
+    """Boxplot comparing per-fold metric distributions across models.
+
+    Each box shows the distribution of a chosen metric over *k* folds
+    for a single model, making it easy to compare both *central tendency*
+    and *spread (stability)* across all models in one glance.
+
+    Parameters
+    ----------
+    cv_results_dict : dict
+        Keys = model names, values = output of ``cross_validate_model()``.
+        Each value must contain ``metric`` as a key, mapping to a dict
+        with at least a ``"folds"`` list.
+    metric : str
+        Which metric to plot (must exist in every cv_results entry).
+    title : str
+        Plot title.
+    ax : matplotlib.axes.Axes or None
+        Axes to draw on.  A new figure is created if *None*.
+
+    Returns
+    -------
+    matplotlib.axes.Axes
+    """
+    import pandas as pd
+
+    # Build a long-form DataFrame for seaborn
+    rows = []
+    for model_name, cv_res in cv_results_dict.items():
+        for fold_val in cv_res[metric]["folds"]:
+            rows.append({"Model": model_name, metric: fold_val})
+    df = pd.DataFrame(rows)
+
+    # Sort models by median metric value (descending for R², ascending for error metrics)
+    medians = df.groupby("Model")[metric].median().sort_values(ascending=False)
+    model_order = medians.index.tolist()
+
+    n_models = len(model_order)
+    if ax is None:
+        _, ax = plt.subplots(
+            figsize=(max(10, n_models * 0.9), 6), **_FIG_DEFAULTS,
+        )
+
+    palette = sns.color_palette("husl", n_colors=n_models)
+    sns.boxplot(
+        data=df, x="Model", y=metric, order=model_order,
+        palette=palette, ax=ax, width=0.55,
+        flierprops=dict(marker="o", markersize=4, alpha=0.5),
+    )
+    # Overlay individual fold points for transparency
+    sns.stripplot(
+        data=df, x="Model", y=metric, order=model_order,
+        color="0.25", size=3.5, alpha=0.6, jitter=True, ax=ax,
+    )
+
+    ax.set_title(title)
+    ax.set_xlabel("")
+    ax.set_ylabel(metric)
+    ax.tick_params(axis="x", rotation=35)
+    ax.grid(True, alpha=0.3, axis="y")
+    plt.tight_layout()
+    return ax
+
+
+# ============================================================================
+# 12. Multi-model Residual Grid
+# ============================================================================
+
+def plot_multi_residuals(
+    y_true: np.ndarray,
+    predictions_dict: dict[str, np.ndarray],
+    ncols: int = 3,
+    title: str = "Residual Analysis Across Models",
+) -> plt.Figure:
+    """Grid of residual scatter plots for multiple models.
+
+    Each subplot shows *residuals vs predicted values* for one model,
+    with a horizontal reference line at zero and a light KDE contour
+    overlay when enough data points are present.
+
+    Parameters
+    ----------
+    y_true : np.ndarray of shape (n_samples,)
+        True target values (same for every model).
+    predictions_dict : dict
+        Keys = model names, values = y_pred arrays.
+    ncols : int
+        Number of columns in the grid layout.
+    title : str
+        Super-title for the entire figure.
+
+    Returns
+    -------
+    matplotlib.figure.Figure
+    """
+    n_models = len(predictions_dict)
+    nrows = max(1, (n_models + ncols - 1) // ncols)
+    fig, axes = plt.subplots(
+        nrows, ncols,
+        figsize=(6 * ncols, 4.5 * nrows),
+        **_FIG_DEFAULTS,
+    )
+    axes = np.atleast_2d(axes)
+
+    for idx, (name, y_pred) in enumerate(predictions_dict.items()):
+        r, c = divmod(idx, ncols)
+        ax = axes[r, c]
+        residuals = np.asarray(y_true) - np.asarray(y_pred)
+
+        ax.scatter(
+            y_pred, residuals, alpha=0.30, s=8,
+            edgecolors="none", color="steelblue",
+        )
+        ax.axhline(y=0, color="red", linewidth=1.0, linestyle="--", alpha=0.8)
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("Residual")
+        ax.set_title(name, fontsize=11)
+        ax.grid(True, alpha=0.25)
+
+    # Hide unused subplots
+    for idx in range(n_models, nrows * ncols):
+        r, c = divmod(idx, ncols)
+        axes[r, c].set_visible(False)
+
+    fig.suptitle(title, fontsize=14, y=1.02)
+    plt.tight_layout()
+    return fig
+
+
+# ============================================================================
+# 13. Violin Plot for Residual Distribution Comparison
+# ============================================================================
+
+def plot_residual_violin(
+    y_true: np.ndarray,
+    predictions_dict: dict[str, np.ndarray],
+    title: str = "Residual Distribution Comparison (Violin Plot)",
+    ax: Optional[plt.Axes] = None,
+) -> plt.Axes:
+    """Violin plot comparing residual distributions across all models.
+
+    Unlike a simple boxplot, the violin plot also shows the *density
+    shape* (e.g. long tails, bimodality).  A well-performing model
+    should have its density concentrated tightly around zero with
+    short, symmetric tails.
+
+    Parameters
+    ----------
+    y_true : np.ndarray of shape (n_samples,)
+    predictions_dict : dict
+        Keys = model names, values = y_pred arrays.
+    title : str
+    ax : matplotlib.axes.Axes or None
+
+    Returns
+    -------
+    matplotlib.axes.Axes
+    """
+    import pandas as pd
+
+    rows = []
+    for name, y_pred in predictions_dict.items():
+        residuals = np.asarray(y_true) - np.asarray(y_pred)
+        for r in residuals:
+            rows.append({"Model": name, "Residual": float(r)})
+    df = pd.DataFrame(rows)
+
+    # Sort models by median absolute residual (best first)
+    order = (
+        df.groupby("Model")["Residual"]
+        .apply(lambda x: x.abs().median())
+        .sort_values()
+        .index.tolist()
+    )
+
+    n_models = len(order)
+    if ax is None:
+        _, ax = plt.subplots(
+            figsize=(max(12, n_models * 1.1), 7), **_FIG_DEFAULTS,
+        )
+
+    palette = sns.color_palette("coolwarm", n_colors=n_models)
+    sns.violinplot(
+        data=df, x="Model", y="Residual", order=order,
+        palette=palette, ax=ax,
+        inner="quartile",   # show median + IQR lines inside
+        cut=2,              # extend density estimation slightly
+        linewidth=0.8,
+        density_norm="width",
+    )
+
+    ax.axhline(y=0, color="black", linewidth=1.0, linestyle="--", alpha=0.6)
+    ax.set_title(title, fontsize=13)
+    ax.set_xlabel("")
+    ax.set_ylabel("Residual (y_true - y_pred)")
+    ax.tick_params(axis="x", rotation=35)
+    ax.grid(True, alpha=0.25, axis="y")
+    plt.tight_layout()
+    return ax
+
+
+# ============================================================================
+# 14. Jointplot (Hexbin / KDE) for Predicted vs Actual
+# ============================================================================
+
+def plot_predicted_vs_actual_joint(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    model_name: str = "Best Model",
+    kind: str = "hex",
+) -> "sns.JointGrid":
+    """Publication-quality jointplot for Predicted vs Actual.
+
+    Combines a dense scatter representation (hexbin or KDE) with
+    marginal histograms / KDE curves.  Ideal for datasets with
+    many thousands of points (e.g. 17 000+) where a plain scatter
+    becomes an unreadable blob.
+
+    Parameters
+    ----------
+    y_true : np.ndarray of shape (n_samples,)
+    y_pred : np.ndarray of shape (n_samples,)
+    model_name : str
+        Used in the title.
+    kind : str
+        ``"hex"`` for hexbin (discrete bins, fast) or
+        ``"kde"`` for bivariate KDE (smooth, slower).
+
+    Returns
+    -------
+    seaborn.JointGrid
+        The JointGrid object (call ``plt.show()`` to display).
+    """
+    import pandas as pd
+
+    plot_df = pd.DataFrame({"Actual": y_true, "Predicted": y_pred})
+
+    g = sns.JointGrid(data=plot_df, x="Actual", y="Predicted", height=8)
+
+    if kind == "hex":
+        g.plot_joint(
+            plt.hexbin, gridsize=40, cmap="YlOrRd", mincnt=1, linewidths=0.2,
+        )
+    elif kind == "kde":
+        g.plot_joint(
+            sns.kdeplot, fill=True, cmap="YlOrRd", levels=30, thresh=0.05,
+        )
+    else:
+        raise ValueError(f"kind must be 'hex' or 'kde', got '{kind}'")
+
+    g.plot_marginals(sns.histplot, kde=True, color="coral", alpha=0.5)
+
+    # Add perfect-prediction reference line
+    lo = min(y_true.min(), y_pred.min())
+    hi = max(y_true.max(), y_pred.max())
+    margin = (hi - lo) * 0.05
+    g.ax_joint.plot(
+        [lo - margin, hi + margin], [lo - margin, hi + margin],
+        "k--", linewidth=1.2, alpha=0.7, label="Ideal (y = x)",
+    )
+    g.ax_joint.legend(loc="upper left", fontsize=9)
+
+    g.figure.suptitle(
+        f"Predicted vs Actual — {model_name}", fontsize=14, y=1.02,
+    )
+    g.figure.tight_layout()
+    return g

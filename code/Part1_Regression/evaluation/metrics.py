@@ -41,14 +41,98 @@ def r_squared(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     return float(1 - ss_res / ss_tot)
 
 
-def compute_all_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, float]:
-    """Compute MSE, RMSE, MAE, R² and return as a dict."""
-    return {
+def medae(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    """Median Absolute Error.
+
+    Extremely robust to outliers in the dataset.  While MAE gives the
+    *mean* of all absolute errors (sensitive to heavy tails), MedAE
+    reports the *median*, which is unaffected by extreme values.
+
+    Parameters
+    ----------
+    y_true : array-like of shape (n_samples,)
+        Ground truth (correct) target values.
+    y_pred : array-like of shape (n_samples,)
+        Estimated target values.
+
+    Returns
+    -------
+    float
+        Median of absolute differences |y_true_i - y_pred_i|.
+    """
+    y_true, y_pred = np.asarray(y_true), np.asarray(y_pred)
+    return float(np.median(np.abs(y_true - y_pred)))
+
+
+def adjusted_r_squared(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    n_features: int,
+) -> float:
+    """Adjusted R-Squared.
+
+    Adjusts R² for the number of predictors in the model, penalising
+    unnecessary complexity.  Unlike plain R² which can only increase
+    (or stay the same) when features are added, Adjusted R² can
+    *decrease* if the added features do not genuinely improve the fit.
+
+    Formula
+    -------
+        Adj R² = 1 - (1 - R²) * (n - 1) / (n - p - 1)
+
+    where *n* = number of samples and *p* = number of features.
+
+    Parameters
+    ----------
+    y_true : array-like of shape (n_samples,)
+    y_pred : array-like of shape (n_samples,)
+    n_features : int
+        Number of predictor variables (columns in X).
+
+    Returns
+    -------
+    float
+    """
+    y_true, y_pred = np.asarray(y_true), np.asarray(y_pred)
+    n = len(y_true)
+    r2 = r_squared(y_true, y_pred)
+    if n - n_features - 1 <= 0:
+        return float("nan")
+    return float(1 - (1 - r2) * (n - 1) / (n - n_features - 1))
+
+
+def compute_all_metrics(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    n_features: int | None = None,
+) -> dict[str, float]:
+    """Compute all evaluation metrics and return as a dict.
+
+    Always includes: MSE, RMSE, MAE, R², MedAE.
+    If *n_features* is provided, also includes Adjusted R².
+
+    Parameters
+    ----------
+    y_true : array-like of shape (n_samples,)
+    y_pred : array-like of shape (n_samples,)
+    n_features : int or None
+        Number of predictor features.  When given, Adjusted R² is
+        appended to the output dict.
+
+    Returns
+    -------
+    dict[str, float]
+    """
+    result = {
         "MSE": mse(y_true, y_pred),
         "RMSE": rmse(y_true, y_pred),
         "MAE": mae(y_true, y_pred),
         "R²": r_squared(y_true, y_pred),
+        "MedAE": medae(y_true, y_pred),
     }
+    if n_features is not None:
+        result["Adj_R²"] = adjusted_r_squared(y_true, y_pred, n_features)
+    return result
 
 
 def print_metrics(metrics: dict[str, float], model_name: str = "Model") -> None:
@@ -168,31 +252,49 @@ def print_cv_results(
 # 3. Verification against sklearn
 # ============================================================================
 
-def verify_against_sklearn(y_true: np.ndarray, y_pred: np.ndarray) -> None:
+def verify_against_sklearn(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    n_features: int | None = None,
+) -> None:
     """Compare custom metrics with sklearn to validate correctness."""
     from sklearn.metrics import (
         mean_absolute_error,
         mean_squared_error,
+        median_absolute_error,
         r2_score,
     )
 
-    custom = compute_all_metrics(y_true, y_pred)
+    custom = compute_all_metrics(y_true, y_pred, n_features=n_features)
     sklearn_vals = {
         "MSE": mean_squared_error(y_true, y_pred),
         "RMSE": np.sqrt(mean_squared_error(y_true, y_pred)),
         "MAE": mean_absolute_error(y_true, y_pred),
         "R²": r2_score(y_true, y_pred),
+        "MedAE": median_absolute_error(y_true, y_pred),
     }
 
     print("\nMetric verification (custom vs sklearn):")
     all_ok = True
-    for key in custom:
+    for key in sklearn_vals:
         diff = abs(custom[key] - sklearn_vals[key])
-        status = "✓" if diff < 1e-10 else "✗"
+        status = "\u2713" if diff < 1e-10 else "\u2717"
         if diff >= 1e-10:
             all_ok = False
         print(f"  {key:>6s}  custom={custom[key]:.10f}  sklearn={sklearn_vals[key]:.10f}  diff={diff:.2e}  {status}")
+
+    # Adjusted R² (sklearn does not provide it, so we verify manually)
+    if "Adj_R²" in custom and n_features is not None:
+        n = len(y_true)
+        r2 = r2_score(y_true, y_pred)
+        adj_r2_manual = 1 - (1 - r2) * (n - 1) / (n - n_features - 1)
+        diff = abs(custom["Adj_R²"] - adj_r2_manual)
+        status = "\u2713" if diff < 1e-10 else "\u2717"
+        if diff >= 1e-10:
+            all_ok = False
+        print(f"  Adj_R²  custom={custom['Adj_R²']:.10f}  manual={adj_r2_manual:.10f}  diff={diff:.2e}  {status}")
+
     if all_ok:
-        print("  All metrics match sklearn! ✓\n")
+        print("  All metrics match sklearn! \u2713\n")
     else:
-        print("  WARNING: Some metrics differ! ✗\n")
+        print("  WARNING: Some metrics differ! \u2717\n")
