@@ -76,30 +76,7 @@
 
 ---
 
-### Giai đoạn 4 - Analysis & Discussion
-
-| Phần           | Thành viên | Nội dung                                      |
-| -------------- | ----- | --------------------------------------------- |
-| Regression     | A + B | Phân tích (A: data insights, B: model insights) |
-| Classification | D + C | Phân tích (D: data insights, C: model insights) |
-| Tổng hợp       | E     | Phân tích các model insights của thuật toán bonus |
-
----
-
-### Giai đoạn 5 - Phần 3 (So sánh & Research)
-Sẽ chia sau
-
-| Thành viên | Nội dung                            |
-| :----------: | ----------------------------------- |
-| A          | |
-| B          |  |
-| C          | |
-| D          | |
-| E          |   |
-
----
-
-### Giai đoạn 6 - Viết báo cáo
+### Giai đoạn 4 - Viết báo cáo
 Ai làm phần nào viết báo cáo phần đó
 
 ---
@@ -111,9 +88,7 @@ Ai làm phần nào viết báo cáo phần đó
 | 1 | 25/3 |
 | 2 | 1/4 |
 | 3 | 8/4 |
-| 4 | 10/4 |
-| 5 | 13/4 |
-| 6 | 18/4 |
+| 4 | 17/4 |
 
 ---
 
@@ -201,9 +176,6 @@ Ai làm phần nào viết báo cáo phần đó
   * Giai đoạn 1: `task/eda-preprocessing/`
   * Giai đoạn 2: `task/models/`
   * Giai đoạn 3: `task/evaluation/`
-  * Giai đoạn 4: `task/analysis/`
-  * Giai đoạn 5 : `task/research/`
-  * Giai đoạn 6: `task/report/`
 
 ### 6.4 Ví dụ branch
 
