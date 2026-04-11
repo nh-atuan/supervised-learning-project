@@ -1,4 +1,4 @@
-# KẾ HOẠCH VIẾT REPORT (REPORT_PLAN)
+# KẾ HOẠCH VIẾT REPORT PHẦN 1 & 2 TRONG ĐỀ BÀI
 
 Map lại 1 cách chuẩn chỉnh giữa “ai code gì → viết report phần đó” cho **Phần 1 & 2** (đúng tiêu chí chấm điểm + tránh overlap + dễ merge LaTeX).
 

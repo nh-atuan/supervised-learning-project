@@ -77,7 +77,7 @@
 ---
 
 ### Giai đoạn 4 - Viết báo cáo
-Ai làm phần nào viết báo cáo phần đó
+Ai làm phần nào viết báo cáo phần đó + thêm phần phân tích & thảo luận + phần so sánh & thực nghiệm trong đề bài.
 
 ---
 
