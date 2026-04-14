@@ -1,7 +1,5 @@
 # KẾ HOẠCH VIẾT REPORT PHẦN 1 & 2 TRONG ĐỀ BÀI
 
-Map lại 1 cách chuẩn chỉnh giữa “ai code gì → viết report phần đó” cho **Phần 1 & 2** (đúng tiêu chí chấm điểm + tránh overlap + dễ merge LaTeX).
-
 ---
 
 # 1. NGUYÊN TẮC CHIA VIỆC 
@@ -11,11 +9,6 @@ Dựa theo đề:
   ```
   Theory → Data → EDA & Preprocessing → Model → Evaluation → Discussion
   ```
-* Nhưng:
-  * **E = viết toàn bộ Theory + bonus**
-  * **Ai code phần nào → viết phần đó**
-
-Suy ra rule:
 
 | Loại phần                   | Ai viết          |
 | --------------------------- | ---------------- |
@@ -215,24 +208,6 @@ Vì B hiểu model sâu nhất
 * Error analysis
 * Linear limitation
 * ...
----
-
-# 4. VAI TRÒ CỦA E 
-### 1. Đồng bộ report
-* notation (ký hiệu toán)
-* style viết
-* format LaTeX
-
-### 2. Viết phần bonus
-* Regression:
-  * Bayesian / Kernel / GP / Bias-Var /...
-* Classification:
-  * Probit / Laplace / Kernel LR /...
-
-### 3. Kiểm tra chéo
-* Model có match theory không
-* Evaluation có đúng metric không
-* Thiếu mục nào trong rubric không
 
 ---
 
