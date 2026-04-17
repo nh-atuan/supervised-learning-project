@@ -33,3 +33,5 @@ outputs/
 .agents/skills/
 skills/
 skills-lock.json
+
+report/
