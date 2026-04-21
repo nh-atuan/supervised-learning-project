@@ -17,8 +17,17 @@ data/*.parquet
 data/*.xlsx
 data/*.json
 !data/README.md
+
+# Model/artifacts
 *.pkl
+*.joblib
+*.pt
+*.pth
+
+# Images
 *.png
+*.jpg
+*.jpeg
 
 # OS files
 .DS_Store
