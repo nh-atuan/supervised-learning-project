@@ -2,14 +2,14 @@
   "seed": 42,
   "reproducible_sanity_check": true,
   "files": {
-    "comparison_table": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\part3_comprehensive_comparison_table.csv",
-    "split_results": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\split_sensitivity_results.csv",
-    "noise_results": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\noise_robustness_results.csv",
-    "corruption_results": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\corruption_robustness_results.csv",
-    "convergence_summary": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\convergence_summary.csv",
-    "experiment_log": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\experiment_log.jsonl",
-    "split_indices": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\split_indices.npz",
-    "environment_snapshot": "D:\\HỌC KÌ 6\\NHẬP MÔN HỌC MÁY\\THỰC HÀNH - BÀI TẬP\\ĐỒ ÁN 1\\supervised-learning-project\\code\\Part3_Comparison\\results\\environment_snapshot.txt"
+    "comparison_table": "supervised-learning-project/code/Part3_Comparison/results/part3_comprehensive_comparison_table.csv",
+    "split_results": "supervised-learning-project/code/Part3_Comparison/results/split_sensitivity_results.csv",
+    "noise_results": "supervised-learning-project/code/Part3_Comparison/results/noise_robustness_results.csv",
+    "corruption_results": "supervised-learning-project/code/Part3_Comparison/results/corruption_robustness_results.csv",
+    "convergence_summary": "supervised-learning-project/code/Part3_Comparison/results/convergence_summary.csv",
+    "experiment_log": "supervised-learning-project/code/Part3_Comparison/results/experiment_log.jsonl",
+    "split_indices": "supervised-learning-project/code/Part3_Comparison/results/split_indices.npz",
+    "environment_snapshot": "supervised-learning-project/code/Part3_Comparison/results/environment_snapshot.txt"
   },
   "counts": {
     "split_records": 21,

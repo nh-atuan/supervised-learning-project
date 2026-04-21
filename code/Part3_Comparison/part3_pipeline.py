@@ -195,42 +195,42 @@ def run_all(seed: int = 42, max_class_samples: int = 30000) -> dict:
     comparison_table = pd.DataFrame(
         [
             {
-                "Tieu chi": "Gia thiet phan phoi",
-                "Linear Reg.": "Gaussian noise, E[y|X] linear",
-                "Ridge/Lasso": "Nhu Linear Reg. + regularization prior",
+                "Tiêu chí": "Giả thiết phân phối",
+                "Linear Reg.": "Gaussian noise, E[y|X] tuyến tính",
+                "Ridge/Lasso": "Như Linear Reg. + regularization prior",
                 "Logistic Reg.": "Bernoulli/Categorical, logit/softmax link",
-                "LDA/QDA": "Gaussian theo lop; LDA chung covariance, QDA rieng covariance",
+                "LDA/QDA": "Gaussian theo lớp; LDA chung covariance, QDA riêng covariance",
             },
             {
-                "Tieu chi": "Nghiem dang dong",
-                "Linear Reg.": "Co (Normal Equation)",
-                "Ridge/Lasso": "Ridge: co; Lasso: khong (coord-descent)",
-                "Logistic Reg.": "Khong (iterative: GD/Newton)",
-                "LDA/QDA": "Co (uoc luong thong ke + Bayes rule)",
+                "Tiêu chí": "Nghiệm dạng đóng",
+                "Linear Reg.": "Có (Normal Equation)",
+                "Ridge/Lasso": "Ridge: có; Lasso: không (coord-descent)",
+                "Logistic Reg.": "Không (lặp: GD/Newton)",
+                "LDA/QDA": "Có (ước lượng thống kê + Bayes rule)",
             },
             {
-                "Tieu chi": "Do phuc tap huan luyen",
-                "Linear Reg.": "Trung binh (giai he tuyen tinh)",
-                "Ridge/Lasso": "Cao hon Linear (CV + regularization)",
-                "Logistic Reg.": "Trung binh-den-cao (iterative optimization)",
-                "LDA/QDA": "LDA nhe; QDA nang hon do covariance theo lop",
+                "Tiêu chí": "Độ phức tạp huấn luyện",
+                "Linear Reg.": "Trung bình (giải hệ tuyến tính)",
+                "Ridge/Lasso": "Cao hơn Linear (CV + regularization)",
+                "Logistic Reg.": "Trung bình đến cao (iterative optimization)",
+                "LDA/QDA": "LDA nhẹ; QDA nặng hơn do covariance theo lớp",
             },
             {
-                "Tieu chi": "Kha nang giai thich",
-                "Linear Reg.": "Rat cao",
-                "Ridge/Lasso": "Cao (Lasso co tinh chat chon dac trung)",
-                "Logistic Reg.": "Cao (he so theo log-odds)",
-                "LDA/QDA": "Trung binh-cao (tham so phan phoi theo lop)",
+                "Tiêu chí": "Khả năng giải thích",
+                "Linear Reg.": "Rất cao",
+                "Ridge/Lasso": "Cao (Lasso có tính chọn đặc trưng)",
+                "Logistic Reg.": "Cao (hệ số theo log-odds)",
+                "LDA/QDA": "Trung bình-cao (tham số phân phối theo lớp)",
             },
             {
-                "Tieu chi": "Nhay voi outlier",
-                "Linear Reg.": "Cao (MSE rat nhay)",
-                "Ridge/Lasso": "Ridge/Lasso giam mot phan nhung van nhay",
-                "Logistic Reg.": "Nhay voi outlier leverage cao",
-                "LDA/QDA": "Nhay do phu thuoc uoc luong mean/covariance",
+                "Tiêu chí": "Nhạy với outlier",
+                "Linear Reg.": "Cao (MSE rất nhạy)",
+                "Ridge/Lasso": "Ridge/Lasso giảm một phần nhưng vẫn nhạy",
+                "Logistic Reg.": "Nhạy với outlier leverage cao",
+                "LDA/QDA": "Nhạy do phụ thuộc ước lượng mean/covariance",
             },
             {
-                "Tieu chi": "Hieu nang thuc nghiem",
+                "Tiêu chí": "Hiệu năng thực nghiệm",
                 "Linear Reg.": f"Best R2={best_linear['R2_test']:.4f} ({best_linear['Model']})",
                 "Ridge/Lasso": f"Best R2={best_ridge_lasso['R2_test']:.4f} ({best_ridge_lasso['Model']})",
                 "Logistic Reg.": f"Best F1-macro={best_logistic['F1_macro']:.4f} ({best_logistic['Model']})",
@@ -566,18 +566,24 @@ def run_all(seed: int = 42, max_class_samples: int = 30000) -> dict:
     p2 = m2.predict(X_reg_all[idx_test])
     reproducible = bool(np.allclose(p1, p2, atol=1e-12))
 
+    def _to_rel(p: Path) -> str:
+        try:
+            return str(p.relative_to(repo_root.parent)).replace("\\", "/")
+        except ValueError:
+            return str(p).replace("\\", "/")
+
     manifest = {
         "seed": seed,
         "reproducible_sanity_check": reproducible,
         "files": {
-            "comparison_table": str(comparison_table_path),
-            "split_results": str(split_df_path),
-            "noise_results": str(noise_df_path),
-            "corruption_results": str(corruption_df_path),
-            "convergence_summary": str(convergence_df_path),
-            "experiment_log": str(log_path),
-            "split_indices": str(split_indices_path),
-            "environment_snapshot": str(env_path),
+            "comparison_table": _to_rel(comparison_table_path),
+            "split_results": _to_rel(split_df_path),
+            "noise_results": _to_rel(noise_df_path),
+            "corruption_results": _to_rel(corruption_df_path),
+            "convergence_summary": _to_rel(convergence_df_path),
+            "experiment_log": _to_rel(log_path),
+            "split_indices": _to_rel(split_indices_path),
+            "environment_snapshot": _to_rel(env_path),
         },
         "counts": {
             "split_records": int(len(split_df)),
