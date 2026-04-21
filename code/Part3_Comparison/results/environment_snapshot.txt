@@ -1,6 +1,10 @@
 Python: 3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]
 Platform: win32
+Node: TUANHO
+Processor: Intel64 Family 6 Model 154 Stepping 3, GenuineIntel (AMD64)
+OS: Windows-10-10.0.26200-SP0
 Seed: 42
+Timestamp: 2026-04-21T18:23:30+07:00
 
 Package versions:
 - numpy==2.4.3
