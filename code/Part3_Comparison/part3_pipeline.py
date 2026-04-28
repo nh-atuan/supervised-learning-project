@@ -29,7 +29,7 @@ from sklearn.model_selection import train_test_split
 def resolve_repo_root() -> Path:
     candidates = [Path.cwd().resolve(), *Path.cwd().resolve().parents]
     for candidate in candidates:
-        if (candidate / "docs" / "REQUIREMENT.md").exists():
+        if (candidate / "README.md").exists():
             return candidate
     raise FileNotFoundError("Cannot locate repository root.")
 
