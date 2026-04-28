@@ -7,8 +7,35 @@ This folder contains original datasets before any preprocessing.
 - `regression/`: raw data for the regression task.
 - `classification/`: raw data for the classification task.
 
-## Notes
+# Bike Sharing Dataset (Raw)
 
-- Do not commit large `.csv` files to Git.
-- Do not modify raw files after downloading.
-- Read each subfolder README for exact file placement instructions.
+## Download
+
+1. Go to:
+https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
+
+2. Download the dataset.
+
+3. Place files in this folder:
+`data/raw/regression/`
+
+## Expected files
+
+- day.csv
+- hour.csv
+
+# Forest Cover Type Dataset (Raw)
+
+## Download
+
+1. Go to:
+https://www.kaggle.com/datasets/uciml/forest-cover-type-dataset
+
+2. Download the dataset (requires a Kaggle account).
+
+3. Place files in this folder:
+`data/raw/classification/`
+
+## Expected files
+
+- covtype.csv
