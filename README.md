@@ -1,6 +1,6 @@
 # Đồ Án 1: Học Có Giám Sát - Nhóm 14
 
-Tài liệu này cung cấp hướng dẫn chi tiết để cài đặt môi trường, chuẩn bị dữ liệu, thực thi toàn bộ mã nguồn của dự án và biên dịch báo cáo LaTeX.
+Tài liệu này cung cấp hướng dẫn chi tiết để cài đặt môi trường, chuẩn bị dữ liệu, thực thi toàn bộ mã nguồn của đồ án.
 
 ---
 
@@ -16,11 +16,11 @@ Tài liệu này cung cấp hướng dẫn chi tiết để cài đặt môi tr�
 
 | Họ và tên | MSSV | Vai trò chính |
 |-----------|------|---------------|
-| Lê Xuân Trí | 23120099 | Phụ trách xử lý dữ liệu và đánh giá (Regression) |
-| Dương Tuấn Anh | 23120208 | Xây dựng các mô hình nền tảng (Regression) |
-| Đàm Tiến Đạt | 23120118 | Triển khai mô hình phân loại (Classification) |
-| Tống Thanh Phúc | 23120158 | Xử lý dữ liệu và đánh giá (Classification) |
-| Nguyễn Hồ Anh Tuấn | 23120185 | Nghiên cứu tổng hợp (Part 3), Đảm bảo chất lượng mã nguồn |
+| Lê Xuân Trí | 23120099 | Xử lý dữ liệu và đánh giá mô hình (Hồi quy) |
+| Dương Tuấn Anh | 23120208 | Xây dựng và triển khai các mô hình nền tảng (Hồi quy) |
+| Tống Thanh Phúc | 23120158 | Xử lý dữ liệu và đánh giá mô hình (Phân loại) |
+| Đàm Tiến Đạt | 23120118 | Xây dựng và triển khai các mô hình nền tảng (Phân loại) |
+| Nguyễn Hồ Anh Tuấn | 23120185 | Xây dựng và triển khai các mô hình nâng cao, nghiên cứu tổng hợp (Phần 3)|
 
 
 ---
@@ -40,32 +40,38 @@ supervised-learning-project/
 │   │   │   ├── 03_linear_regression.ipynb # Huấn luyện mô hình Hồi quy tuyến tính cơ bản
 │   │   │   ├── 04_regularized_regression.ipynb # Hồi quy có kiểm soát (Ridge, Lasso, ElasticNet)
 │   │   │   ├── 05_nonlinear_models.ipynb  # Các mô hình phi tuyến (Polynomial, kNN, SVR)
-│   │   │   └── 06_advanced_regression.ipynb # Mô hình nâng cao/Ensemble (Random Forest, Gradient Boosting, v.v.)
-│   │   └── evaluation/
-│   │       └── 07_evaluation.ipynb        # Đánh giá, so sánh hiệu suất và phân tích lỗi các mô hình
+│   │   │   └── 06_advanced_regression.ipynb # Các mô hình nâng cao
+│   │   ├── evaluation/
+│   │   │   └── 07_evaluation.ipynb        # Đánh giá, so sánh hiệu suất và phân tích lỗi các mô hình
+│   │   └── utils.py                       # Thư viện tiện ích dùng chung cho bài toán Hồi quy
 │   │
 │   ├── Part2_Classification/              # Mã nguồn bài toán Phân loại (Forest Cover Type)
 │   │   ├── eda_preprocessing/
 │   │   │   ├── 01_eda.ipynb               # Phân tích khám phá dữ liệu (EDA)
 │   │   │   └── 02_preprocessing.ipynb     # Tiền xử lý, xử lý mất cân bằng và mã hóa dữ liệu
 │   │   ├── models/
-│   │   │   ├── 03_classification_model_training.ipynb # Huấn luyện các mô hình phân loại cơ bản
-│   │   │   └── 04_advanced_classification.ipynb # Mô hình phân loại nâng cao (Ensemble, XGBoost, LightGBM)
-│   │   └── evaluation/
-│   │       └── 05_evaluation.ipynb        # Đánh giá, so sánh hiệu suất và phân tích lỗi các mô hình
+│   │   │   ├── 03_classification_model_training.ipynb # Huấn luyện các mô hình phân loại
+│   │   │   └── 04_advanced_classification.ipynb # Các mô hình nâng cao
+│   │   ├── evaluation/
+│   │   │   └── 05_evaluation.ipynb        # Đánh giá, so sánh hiệu suất và phân tích lỗi các mô hình
+│   │   └── utils.py                       # Thư viện tiện ích dùng chung cho bài toán Phân loại
 │   │
 │   └── Part3_Comparison/                  # Phân tích chuyên sâu và so sánh tổng hợp
-│       ├── 08_part3_comparison_research.ipynb # Chạy các thí nghiệm độ nhạy, nhiễu, hỏng dữ liệu và hội tụ
+│       ├── part3_comparison_research.ipynb # Chạy các thí nghiệm độ nhạy, nhiễu, hỏng dữ liệu và hội tụ
 │       └── part3_pipeline.py              # Script Python chạy tự động pipeline thí nghiệm phần 3
-├── docs/                                  # Tài liệu dự án, kế hoạch và đánh giá
-│   ├── DATASET_SUMMARY.md                 # Tóm tắt, giải thích các tập dữ liệu
-│   ├── PLAN.md                            # Kế hoạch và phân công công việc
-│   ├── REPORT_PLAN.md                     # Dàn ý kế hoạch báo cáo
-│   ├── REQUIREMENT.md                     # Yêu cầu đề bài của Đồ án
-│   └── REVIEW.md                          # Review tiến độ và chất lượng mã nguồn
-└── requirements.txt                       # Danh sách các thư viện Python cần cài đặt
+├── data/                                  # Dữ liệu thô và dữ liệu đã xử lý (không commit lên Git)
+│   ├── raw/                               # Dữ liệu gốc tải về, không chỉnh sửa
+│   │   ├── regression/                    # Dữ liệu thô bài toán Hồi quy
+│   │   │   ├── day.csv                    # Bike Sharing Dataset — thống kê theo ngày
+│   │   │   └── hour.csv                   # Bike Sharing Dataset — thống kê theo giờ
+│   │   └── classification/               # Dữ liệu thô bài toán Phân loại
+│   │       └── covtype.csv                # Forest Cover Type Dataset
+│   └── processed/                         # Dữ liệu đã qua tiền xử lý, sẵn sàng cho mô hình
+│       ├── regression/                    # Được tạo bởi 02_preprocessing.ipynb (Part 1)
+│       └── classification/               # Được tạo bởi 02_preprocessing.ipynb (Part 2)
+├── requirements.txt                       # Danh sách các thư viện cần cài đặt
+└── README.md                             # Tài liệu này
 ```
-
 ---
 
 ## 3. Cài Đặt Môi Trường
