@@ -543,11 +543,26 @@ def run_all(seed: int = 42, max_class_samples: int = 30000) -> dict:
         "scipy",
         "statsmodels",
         "joblib",
+        "ipykernel",
+        "jupyter",
+        "nbformat",
+        "tqdm",
     ]
+
+    import platform
+    from datetime import datetime, timezone, timedelta
+
+    tz_vn = timezone(timedelta(hours=7))
+    timestamp = datetime.now(tz=tz_vn).strftime("%Y-%m-%dT%H:%M:%S+07:00")
+
     env_lines = [
         f"Python: {sys.version}",
         f"Platform: {sys.platform}",
+        f"Node: {platform.node()}",
+        f"Processor: {platform.processor()} ({platform.machine()})",
+        f"OS: {platform.platform()}",
         f"Seed: {seed}",
+        f"Timestamp: {timestamp}",
         "",
         "Package versions:",
     ]
@@ -557,6 +572,7 @@ def run_all(seed: int = 42, max_class_samples: int = 30000) -> dict:
         except PackageNotFoundError:
             env_lines.append(f"- {pkg}: not found")
     env_path.write_text("\n".join(env_lines), encoding="utf-8")
+
 
     # Determinism sanity check
     idx_train, idx_test = train_test_split(np.arange(len(y_reg_all)), train_size=0.7, random_state=seed, shuffle=True)

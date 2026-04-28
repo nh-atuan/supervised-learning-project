@@ -7,11 +7,15 @@ Seed: 42
 Timestamp: 2026-04-21T18:23:30+07:00
 
 Package versions:
-- numpy==2.4.3
-- pandas==3.0.1
-- matplotlib==3.10.8
+- numpy==1.26.4
+- pandas==2.2.3
+- matplotlib==3.10.0
 - seaborn==0.13.2
-- scikit-learn==1.8.0
-- scipy==1.17.1
-- statsmodels: not found
-- joblib==1.5.3
+- scikit-learn==1.4.2
+- scipy==1.12.0
+- statsmodels==0.14.2
+- joblib==1.4.2
+- ipykernel==7.2.0
+- jupyter==1.1.1
+- nbformat==5.10.4
+- tqdm==4.67.1
