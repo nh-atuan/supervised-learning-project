@@ -20,7 +20,7 @@ Tài liệu này cung cấp hướng dẫn chi tiết để cài đặt môi tr�
 | Dương Tuấn Anh | 23120208 | Xây dựng và triển khai các mô hình nền tảng (Hồi quy) |
 | Tống Thanh Phúc | 23120158 | Xử lý dữ liệu và đánh giá mô hình (Phân loại) |
 | Đàm Tiến Đạt | 23120118 | Xây dựng và triển khai các mô hình nền tảng (Phân loại) |
-| Nguyễn Hồ Anh Tuấn | 23120185 | Xây dựng và triển khai các mô hình nâng cao, nghiên cứu tổng hợp (Phần 3)|
+| Nguyễn Hồ Anh Tuấn | 23120185 | Xây dựng và triển khai các mô hình nâng cao, nghiên cứu tổng hợp|
 
 
 ---
